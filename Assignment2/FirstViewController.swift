@@ -7,12 +7,58 @@
 //
 
 import UIKit
+import MapKit
+import CoreLocation
 
-class FirstViewController: UIViewController,  UITableViewDelegate, UITableViewDataSource {
+class FirstViewController: UIViewController,  UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate {
     @IBOutlet weak var restaurantTable: UITableView!
     
     var restaurants = [Restaurant]()
+    let locationManager = CLLocationManager()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        initLocationManager()
+        initRestaurantTable()
+        
+        apiCall()
+    }
 
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    func initLocationManager() {
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestAlwaysAuthorization()
+        locationManager.startUpdatingLocation()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let locValue:CLLocationCoordinate2D = manager.location!.coordinate
+        print("locations = \(locValue.latitude) \(locValue.longitude)")
+    }
+    
+    func getLong() -> Double {
+        return locationManager.location!.coordinate.longitude
+    }
+    
+    func getLat() -> Double {
+        return locationManager.location!.coordinate.latitude
+    }
+    
+    func initRestaurantTable() {
+        let mcdonalds = Restaurant()
+        mcdonalds.BusinessName = "McDonalds"
+        restaurants.append(mcdonalds)
+        
+        restaurantTable.dataSource = self
+        restaurantTable.delegate = self
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return restaurants.count
     }
@@ -26,22 +72,12 @@ class FirstViewController: UIViewController,  UITableViewDelegate, UITableViewDa
         return cell
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    func apiCall() {
+        let lat = getLat()
+        let long = getLong()
         
-        let mcdonalds = Restaurant()
-        mcdonalds.BusinessName = "McDonalds"
-        restaurants.append(mcdonalds)
-        
-        restaurantTable.dataSource = self
-        restaurantTable.delegate = self
+        let query = "?op=s_loc&lat=\(lat)&long=\(long)"
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
 
 }
 
