@@ -24,10 +24,47 @@ class FirstViewController: UIViewController,  UITableViewDelegate, UITableViewDa
         
         apiCall()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    func updateRestaurantsTable(restaurants: [Restaurant]?, error: Error?) -> Void {
+        // Set restaurants array to the results of the Http request
+        self.restaurants = restaurants!
+        
+        // Reload the table view on the main thread
+        DispatchQueue.main.async() {
+            self.restaurantTable.reloadData()
+        }
+    }
+    
+    func apiCall() {
+        ApiHelper.getNearestRestaurants(
+            lat: getLat(),
+            long: getLong(),
+            completionHandler: updateRestaurantsTable
+        )
+    }
+    
+    func initRestaurantTable() {
+        restaurantTable.dataSource = self
+        restaurantTable.delegate = self
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return restaurants.count
+    }
+    
+    // Cell View options
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = restaurantTable.dequeueReusableCell(withIdentifier: "restaurantCell", for: indexPath) as! RestaurantCell
+        
+        let restaurant = restaurants[indexPath.row]
+        
+        var rating = restaurant.RatingValue
+        if (rating == "-1") {
+            rating = "Exempt"
+        }
+        
+        cell.nameLabel.text = "\(restaurant.BusinessName) - \(rating)"
+        return cell
     }
     
     func initLocationManager() {
@@ -49,42 +86,10 @@ class FirstViewController: UIViewController,  UITableViewDelegate, UITableViewDa
     func getLat() -> Double {
         return locationManager.location!.coordinate.latitude
     }
-    
-    func initRestaurantTable() {
-        restaurantTable.dataSource = self
-        restaurantTable.delegate = self
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return restaurants.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = restaurantTable.dequeueReusableCell(withIdentifier: "restaurantCell", for: indexPath) as! RestaurantCell
-        
-        let restaurant = restaurants[indexPath.row]
-        
-        var rating = restaurant.RatingValue
-        if (rating == "-1") {
-            rating = "Exempt"
-        }
-        
-        cell.nameLabel.text = "\(restaurant.BusinessName) - \(rating)"
-        return cell
-    }
-    
-    func complete(restaurants: [Restaurant]?, error: Error?) -> Void {
-        self.restaurants = restaurants!
-        
-        DispatchQueue.main.async() {
-            self.restaurantTable.reloadData()
-        }
-    }
-    
-    func apiCall() {
-        ApiHelper.getNearestRestaurants(lat: getLat(), long: getLong(), completionHandler: complete)
-        
-    }
 
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
 }
 
