@@ -51,10 +51,6 @@ class FirstViewController: UIViewController,  UITableViewDelegate, UITableViewDa
     }
     
     func initRestaurantTable() {
-        let mcdonalds = Restaurant()
-        mcdonalds.BusinessName = "McDonalds"
-        restaurants.append(mcdonalds)
-        
         restaurantTable.dataSource = self
         restaurantTable.delegate = self
     }
@@ -68,15 +64,26 @@ class FirstViewController: UIViewController,  UITableViewDelegate, UITableViewDa
         
         let restaurant = restaurants[indexPath.row]
         
-        cell.nameLabel.text = "\(restaurant.BusinessName)"
+        var rating = restaurant.RatingValue
+        if (rating == "-1") {
+            rating = "Exempt"
+        }
+        
+        cell.nameLabel.text = "\(restaurant.BusinessName) - \(rating)"
         return cell
     }
     
-    func apiCall() {
-        let lat = getLat()
-        let long = getLong()
+    func complete(restaurants: [Restaurant]?, error: Error?) -> Void {
+        self.restaurants = restaurants!
         
-        let query = "?op=s_loc&lat=\(lat)&long=\(long)"
+        DispatchQueue.main.async() {
+            self.restaurantTable.reloadData()
+        }
+    }
+    
+    func apiCall() {
+        ApiHelper.getNearestRestaurants(lat: getLat(), long: getLong(), completionHandler: complete)
+        
     }
 
 }

@@ -8,28 +8,16 @@
 
 import Foundation
 
-class Restaurant {
-    var id: Int
+struct Restaurant : Codable {
+    var id: String
     var BusinessName: String
     var AddressLine1: String
     var AddressLine2: String
     var AddressLine3: String
     var PostCode: String
-    var RatingValue: Int
-    var RatingDate: Date
-    var Longitude: Decimal
-    var Latitude: Decimal
-    
-    init() {
-        self.id = -1
-        self.BusinessName = ""
-        self.AddressLine1 = ""
-        self.AddressLine2 = ""
-        self.AddressLine3 = ""
-        self.PostCode = ""
-        self.RatingValue = -2
-        self.RatingDate = Date()
-        self.Longitude = 0
-        self.Latitude = 0
-    }
+    var RatingValue: String
+    var RatingDate: String
+    var Longitude: String
+    var Latitude: String
+    var DistanceKM: String
 }
