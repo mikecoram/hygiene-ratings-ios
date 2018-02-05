@@ -75,18 +75,18 @@
 				27E42DE2201F433800AC7E15 /* AppDelegate.swift */,
 				27E42DE4201F433800AC7E15 /* FirstViewController.swift */,
 				27E42DE6201F433800AC7E15 /* SecondViewController.swift */,
-				27E42DE8201F433800AC7E15 /* Main.storyboard */,
 				2715410720284A63005CC0D1 /* DetailViewController.swift */,
+				27E42DE8201F433800AC7E15 /* Main.storyboard */,
 				27E42DEB201F433800AC7E15 /* Assets.xcassets */,
 				27E42DED201F433800AC7E15 /* LaunchScreen.storyboard */,
 				27E42DF0201F433800AC7E15 /* Info.plist */,
+				2714F1BC2028B59100272FB0 /* AppState.swift */,
 				27E42DF8201F465B00AC7E15 /* Restaurant.swift */,
 				27E42DFA201F485800AC7E15 /* RestaurantCell.swift */,
+				2715410D20289829005CC0D1 /* RestaurantTableDataSource.swift */,
 				27E42DFE201F502B00AC7E15 /* Api.swift */,
 				2715410920289598005CC0D1 /* LocationHandler.swift */,
 				2715410B202897E1005CC0D1 /* ImageHandler.swift */,
-				2715410D20289829005CC0D1 /* RestaurantTableDataSource.swift */,
-				2714F1BC2028B59100272FB0 /* AppState.swift */,
 			);
 			path = Assignment2;
 			sourceTree = "<group>";

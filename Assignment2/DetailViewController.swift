@@ -10,6 +10,8 @@ import UIKit
 import MapKit
 
 class DetailViewController : UIViewController {
+    @IBOutlet weak var hygieneImage: UIImageView!
+    
     @IBOutlet weak var map: MKMapView!
     
     @IBOutlet weak var BusinessNameLabel: UILabel!
@@ -41,8 +43,9 @@ class DetailViewController : UIViewController {
         
         BusinessNameLabel.text = restaurant?.BusinessName
         AddressLabel.text = "\(restaurant!.AddressLine1)\n\(restaurant!.AddressLine2)\n\(restaurant!.AddressLine3)\n\(restaurant!.PostCode)"
-        CoordinatesLabel.text = "Latitude:\(restaurant!.Latitude), Longitude:\(restaurant!.Longitude), Distance from current location:\(restaurant!.DistanceKM)"
         
-        RatingDateLabel.text = restaurant!.RatingDate
+        RatingDateLabel.text = "Rated on: \(restaurant!.RatingDate)"
+        
+        hygieneImage.image = UIImage.init(named: ImageHandler.getHygieneImageLocation(rating: restaurant!.RatingValue))
     }
 }

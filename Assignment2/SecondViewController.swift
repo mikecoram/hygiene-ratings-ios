@@ -14,8 +14,6 @@ class SecondViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        
         initMap()
     }
     
@@ -27,9 +25,7 @@ class SecondViewController: UIViewController {
         )
         let region: MKCoordinateRegion = MKCoordinateRegionMake(location, span)
         map.setRegion(region, animated: true)
-        
-        print(AppState.restaurants.count)
-        
+                
         for restaurant in AppState.restaurants {
             let annotation = MKPointAnnotation()
             
