@@ -8,7 +8,8 @@
 
 import Foundation
 
-class ApiHelper {
+class Api {
+    
     static func getNearestRestaurants(lat: Double, long: Double, completionHandler: @escaping ([Restaurant]?, Error?) -> Void) {
         getRestaurants(query: "?op=s_loc&lat=\(lat)&long=\(long)", completionHandler: completionHandler)
     }

@@ -10,93 +10,48 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class FirstViewController: UIViewController,  UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate {
+class FirstViewController: UIViewController {
     @IBOutlet weak var restaurantTable: UITableView!
     
-    var restaurants = [Restaurant]()
-    let locationManager = CLLocationManager()
+    let locationHandler : LocationHandler = LocationHandler()
+    let restaurantTableSource = RestaurantTableDataSource()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        initLocationManager()
         initRestaurantTable()
-        
         apiCall()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let cell = sender as! RestaurantCell
-        let restaurant = restaurants[cell.index!]
-        print(restaurant.BusinessName)
-    }
-    
-    func updateRestaurantsTable(restaurants: [Restaurant]?, error: Error?) -> Void {
-        // Set restaurants array to the results of the Http request
-        self.restaurants = restaurants!
-        
-        // Reload the table view on the main thread
-        DispatchQueue.main.async() {
-            self.restaurantTable.reloadData()
-        }
+    func initRestaurantTable() {
+        restaurantTable.dataSource = restaurantTableSource
+        restaurantTable.delegate = restaurantTableSource
     }
     
     func apiCall() {
-        ApiHelper.getNearestRestaurants(
-            lat: getLat(),
-            long: getLong(),
+        Api.getNearestRestaurants(
+            lat: locationHandler.getLat(),
+            long: locationHandler.getLong(),
             completionHandler: updateRestaurantsTable
         )
     }
     
-    func initRestaurantTable() {
-        restaurantTable.dataSource = self
-        restaurantTable.delegate = self
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return restaurants.count
-    }
-    
-    // Cell View options
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = restaurantTable.dequeueReusableCell(withIdentifier: "restaurantCell", for: indexPath) as! RestaurantCell
+    func updateRestaurantsTable(restaurants: [Restaurant]?, error: Error?) -> Void {
+        // Set restaurants array to the results of the Http request
+        AppState.restaurants = restaurants!
         
-        let restaurant = restaurants[indexPath.row]
-        
-        var rating = restaurant.RatingValue
-        if (rating == "-1") {
-            rating = "Exempt"
+        // Reload the table view on the main thread
+        DispatchQueue.main.async() {
+            self.restaurantTableSource.setRestaurants(restaurants: restaurants!)
+            self.restaurantTable.reloadData()
         }
-        
-        cell.index = indexPath.row
-        cell.nameLabel.text = "\(restaurant.BusinessName) - \(rating)"
-        return cell
     }
     
-    func initLocationManager() {
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestAlwaysAuthorization()
-        locationManager.startUpdatingLocation()
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let locValue:CLLocationCoordinate2D = manager.location!.coordinate
-        print("locations = \(locValue.latitude) \(locValue.longitude)")
-    }
-    
-    func getLat() -> Double {
-        return locationManager.location!.coordinate.latitude
-    }
-    
-    func getLong() -> Double {
-        return locationManager.location!.coordinate.longitude
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Display selected restaurant details
+        let cell = sender as! RestaurantCell
+        let restaurant = AppState.restaurants[cell.index!]
+        (segue.destination as! DetailViewController).restaurant = restaurant
     }
 }
 
