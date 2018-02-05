@@ -25,6 +25,12 @@ class FirstViewController: UIViewController,  UITableViewDelegate, UITableViewDa
         apiCall()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let cell = sender as! RestaurantCell
+        let restaurant = restaurants[cell.index!]
+        print(restaurant.BusinessName)
+    }
+    
     func updateRestaurantsTable(restaurants: [Restaurant]?, error: Error?) -> Void {
         // Set restaurants array to the results of the Http request
         self.restaurants = restaurants!
@@ -63,6 +69,7 @@ class FirstViewController: UIViewController,  UITableViewDelegate, UITableViewDa
             rating = "Exempt"
         }
         
+        cell.index = indexPath.row
         cell.nameLabel.text = "\(restaurant.BusinessName) - \(rating)"
         return cell
     }
@@ -79,14 +86,14 @@ class FirstViewController: UIViewController,  UITableViewDelegate, UITableViewDa
         print("locations = \(locValue.latitude) \(locValue.longitude)")
     }
     
+    func getLat() -> Double {
+        return locationManager.location!.coordinate.latitude
+    }
+    
     func getLong() -> Double {
         return locationManager.location!.coordinate.longitude
     }
     
-    func getLat() -> Double {
-        return locationManager.location!.coordinate.latitude
-    }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

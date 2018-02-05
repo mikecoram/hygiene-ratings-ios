@@ -9,6 +9,7 @@
 import UIKit
 
 class RestaurantCell: UITableViewCell {
+    var index : Int?
     @IBOutlet weak var nameLabel: UILabel!
     
     override func awakeFromNib() {
