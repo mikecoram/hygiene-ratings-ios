@@ -10,4 +10,5 @@ import Foundation
 
 class AppState {
     static var restaurants : [Restaurant] = [Restaurant]()
+    static let locationHandler : LocationHandler = LocationHandler()
 }

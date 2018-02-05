@@ -13,7 +13,6 @@ import CoreLocation
 class FirstViewController: UIViewController {
     @IBOutlet weak var restaurantTable: UITableView!
     
-    let locationHandler : LocationHandler = LocationHandler()
     let restaurantTableSource = RestaurantTableDataSource()
     
     override func viewDidLoad() {
@@ -30,8 +29,8 @@ class FirstViewController: UIViewController {
     
     func apiCall() {
         Api.getNearestRestaurants(
-            lat: locationHandler.getLat(),
-            long: locationHandler.getLong(),
+            lat: AppState.locationHandler.getLat(),
+            long: AppState.locationHandler.getLong(),
             completionHandler: updateRestaurantsTable
         )
     }
