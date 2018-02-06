@@ -9,12 +9,13 @@
 import Foundation
 
 class Api {
-    
-    static func getNearestRestaurants(lat: Double, long: Double, completionHandler: @escaping ([Restaurant]?, Error?) -> Void) {
-        getRestaurants(query: "?op=s_loc&lat=\(lat)&long=\(long)", completionHandler: completionHandler)
+    static var BASE_URL = "http://radikaldesign.co.uk/sandbox/hygiene.php"
+        
+    static func getRestaurantsNearestToLocation(coordinate: Coordinate, completionHandler: @escaping ([Restaurant]?, Error?) -> Void) {
+        getRestaurants(query: "?op=s_loc&lat=\(coordinate.latitude)&long=\(coordinate.longitude)", completionHandler: completionHandler)
     }
     
-    static func getRestaurantByName(name: String, completionHandler: @escaping ([Restaurant]?, Error?) -> Void) {
+    static func getRestaurantsByName(name: String, completionHandler: @escaping ([Restaurant]?, Error?) -> Void) {
         getRestaurants(query: "?op=s_name&name=\(name)", completionHandler: completionHandler)
     }
     
@@ -23,7 +24,7 @@ class Api {
     }
         
     class func getRestaurants(query: String, completionHandler: @escaping ([Restaurant]?, Error?) -> Void) {
-        let url = URL(string: "http://radikaldesign.co.uk/sandbox/hygiene.php\(query)")
+        let url = URL(string: "\(BASE_URL)\(query)")
         
         let session = URLSession.shared
         session.dataTask(with: url!) { (data, response, error) in

@@ -10,5 +10,27 @@ import Foundation
 
 class AppState {
     static var restaurants : [Restaurant] = [Restaurant]()
-    static let locationHandler : LocationHandler = LocationHandler()
+    static let locationHandler = LocationHandler()
+    static var updateCallbacks = [() -> Void]()
+    
+    class func complete(restaurants: [Restaurant]?, error: Error?) -> Void {
+        AppState.restaurants = restaurants!
+
+        for callback in updateCallbacks {
+            callback()
+        }
+    }
+    
+    static func popluateRestaurantsByLocation(coordinate: Coordinate) {
+        Api.getRestaurantsNearestToLocation(coordinate: coordinate, completionHandler: complete)
+    }
+    
+    static func populateRestaurantsByName(name: String) {
+        Api.getRestaurantsByName(name: name, completionHandler: complete)
+    }
+    
+    static func populateRestaurantsByPostcode(postcode: String) {
+        Api.getRestaurantsByPostcode(postcode: postcode, completionHandler: complete)
+
+    }
 }

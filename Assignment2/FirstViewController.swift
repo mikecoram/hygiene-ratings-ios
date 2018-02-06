@@ -19,7 +19,8 @@ class FirstViewController: UIViewController {
         super.viewDidLoad()
         
         initRestaurantTable()
-        apiCall()
+        AppState.updateCallbacks.append(updateRestaurantsTable)
+        AppState.popluateRestaurantsByLocation(coordinate: AppState.locationHandler.getCurrentCoordinate())
     }
     
     func initRestaurantTable() {
@@ -27,21 +28,10 @@ class FirstViewController: UIViewController {
         restaurantTable.delegate = restaurantTableSource
     }
     
-    func apiCall() {
-        Api.getNearestRestaurants(
-            lat: AppState.locationHandler.getLat(),
-            long: AppState.locationHandler.getLong(),
-            completionHandler: updateRestaurantsTable
-        )
-    }
-    
-    func updateRestaurantsTable(restaurants: [Restaurant]?, error: Error?) -> Void {
-        // Set restaurants array to the results of the Http request
-        AppState.restaurants = restaurants!
-        
+    func updateRestaurantsTable() -> Void {
         // Reload the table view on the main thread
         DispatchQueue.main.async() {
-            self.restaurantTableSource.setRestaurants(restaurants: restaurants!)
+            self.restaurantTableSource.setRestaurants(restaurants: AppState.restaurants)
             self.restaurantTable.reloadData()
         }
     }

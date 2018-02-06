@@ -11,21 +11,36 @@ import MapKit
 
 class SecondViewController: UIViewController {
     @IBOutlet weak var map: MKMapView!
+    let SPAN_SIZE = 0.005
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        AppState.updateCallbacks.append(initMap)
         initMap()
     }
     
     func initMap() {
-        let span: MKCoordinateSpan = MKCoordinateSpanMake(0.001, 0.001)
+        let coordinate = AppState.locationHandler.getCurrentCoordinate()
+        
+        let span: MKCoordinateSpan = MKCoordinateSpanMake(SPAN_SIZE, SPAN_SIZE)
         let location: CLLocationCoordinate2D = CLLocationCoordinate2DMake(
-            AppState.locationHandler.getLat(),
-            AppState.locationHandler.getLong()
+            coordinate.latitude,
+            coordinate.longitude
         )
         let region: MKCoordinateRegion = MKCoordinateRegionMake(location, span)
         map.setRegion(region, animated: true)
-                
+        
+        DispatchQueue.main.async() {
+            self.clearAnnotations()
+            self.addAnnotations()
+        }
+    }
+    
+    func clearAnnotations() {
+        map.removeAnnotations(map.annotations)
+    }
+    
+    func addAnnotations() {
         for restaurant in AppState.restaurants {
             let annotation = MKPointAnnotation()
             
@@ -37,14 +52,6 @@ class SecondViewController: UIViewController {
             
             map.addAnnotation(annotation)
         }
-        
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-
 }
 

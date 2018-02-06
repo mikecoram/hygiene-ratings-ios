@@ -9,22 +9,28 @@
 import Foundation
 import CoreLocation
 
+class Coordinate {
+    var latitude: Double
+    var longitude: Double
+    
+    init(latitude: Double, longitude: Double) {
+        self.latitude = latitude
+        self.longitude = longitude
+    }
+}
+
 class LocationHandler {
     let locationManager = CLLocationManager()
-
-    func initLocationManager() {
+    
+    init() {
         locationManager.delegate = self as? CLLocationManagerDelegate
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestAlwaysAuthorization()
         locationManager.startUpdatingLocation()
     }
     
-    func getLat() -> Double {
-        return locationManager.location!.coordinate.latitude
+    func getCurrentCoordinate() -> Coordinate {
+        let locManagerCoordinate = locationManager.location!.coordinate
+        return Coordinate(latitude: locManagerCoordinate.latitude, longitude: locManagerCoordinate.longitude)
     }
-    
-    func getLong() -> Double {
-        return locationManager.location!.coordinate.longitude
-    }
-
 }

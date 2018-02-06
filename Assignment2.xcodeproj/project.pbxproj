@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2714F1BD2028B59100272FB0 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2714F1BC2028B59100272FB0 /* AppState.swift */; };
+		2714F1C32028D45000272FB0 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2714F1C22028D45000272FB0 /* TabBarController.swift */; };
 		2715410820284A63005CC0D1 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2715410720284A63005CC0D1 /* DetailViewController.swift */; };
 		2715410A20289598005CC0D1 /* LocationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2715410920289598005CC0D1 /* LocationHandler.swift */; };
 		2715410C202897E1005CC0D1 /* ImageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2715410B202897E1005CC0D1 /* ImageHandler.swift */; };
@@ -25,6 +26,7 @@
 
 /* Begin PBXFileReference section */
 		2714F1BC2028B59100272FB0 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		2714F1C22028D45000272FB0 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		2715410720284A63005CC0D1 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		2715410920289598005CC0D1 /* LocationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationHandler.swift; sourceTree = "<group>"; };
 		2715410B202897E1005CC0D1 /* ImageHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageHandler.swift; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 				27E42DE6201F433800AC7E15 /* SecondViewController.swift */,
 				2715410720284A63005CC0D1 /* DetailViewController.swift */,
 				27E42DE8201F433800AC7E15 /* Main.storyboard */,
+				2714F1C22028D45000272FB0 /* TabBarController.swift */,
 				27E42DEB201F433800AC7E15 /* Assets.xcassets */,
 				27E42DED201F433800AC7E15 /* LaunchScreen.storyboard */,
 				27E42DF0201F433800AC7E15 /* Info.plist */,
@@ -172,6 +175,7 @@
 				2714F1BD2028B59100272FB0 /* AppState.swift in Sources */,
 				2715410820284A63005CC0D1 /* DetailViewController.swift in Sources */,
 				2715410C202897E1005CC0D1 /* ImageHandler.swift in Sources */,
+				2714F1C32028D45000272FB0 /* TabBarController.swift in Sources */,
 				2715410A20289598005CC0D1 /* LocationHandler.swift in Sources */,
 				2715410E20289829005CC0D1 /* RestaurantTableDataSource.swift in Sources */,
 			);
