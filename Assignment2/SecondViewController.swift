@@ -19,7 +19,7 @@ class SecondViewController: UIViewController, MKMapViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        AppState.updateCallbacks.append(initMap)
+        AppState.postPopulateCallbacks.append(initMap)
         
         map.delegate = self
         map.mapType = MKMapType.standard
@@ -39,8 +39,8 @@ class SecondViewController: UIViewController, MKMapViewDelegate {
         let region: MKCoordinateRegion = MKCoordinateRegionMake(location, span)
         map.setRegion(region, animated: true)
         
-        self.clearAnnotations()
-        self.addAnnotations()
+        clearAnnotations()
+        addAnnotations()
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {

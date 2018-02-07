@@ -40,6 +40,9 @@ class Api {
                 } catch {
                     print("Decode Error:")
                     print(error)
+                    DispatchQueue.main.async() {
+                        completionHandler(nil, error)
+                    }
                 }
             }
         }.resume()

@@ -12,30 +12,50 @@ class AppState {
     static var title = String()
     static var restaurants : [Restaurant] = [Restaurant]()
     static let locationHandler = LocationHandler()
-    static var updateCallbacks = [() -> Void]()
+    
+    // Functions to call after the restaurants array has been populated
+    static var postPopulateCallbacks = [() -> Void]()
+    
     static var setViewTitle : ((_ :String) -> Void)?
     
     class func complete(restaurants: [Restaurant]?, error: Error?) -> Void {
-        AppState.restaurants = restaurants!
+        if error == nil {
+            AppState.restaurants = restaurants!
+        }
+        else {
+            AppState.restaurants = [Restaurant]()
+        }
         
-        for callback in updateCallbacks {
+        for callback in postPopulateCallbacks {
             callback()
         }
     }
     
     static func popluateRestaurantsByLocation(coordinate: Coordinate) {
         setTitle("Nearest Restaurants")
-        Api.getRestaurantsNearestToLocation(coordinate: coordinate, completionHandler: complete)
+        
+        Api.getRestaurantsNearestToLocation(
+            coordinate: coordinate,
+            completionHandler: complete
+        )
     }
     
     static func populateRestaurantsByName(name: String) {
         setTitle("'\(name)'")
-        Api.getRestaurantsByName(name: name, completionHandler: complete)
+        
+        Api.getRestaurantsByName(
+            name: name,
+            completionHandler: complete
+        )
     }
     
     static func populateRestaurantsByPostcode(postcode: String) {
         setTitle("'\(postcode)'")
-        Api.getRestaurantsByPostcode(postcode: postcode, completionHandler: complete)
+        
+        Api.getRestaurantsByPostcode(
+            postcode: postcode,
+            completionHandler: complete
+        )
     }
     
     static func setTitle(_ title: String) {

@@ -19,7 +19,7 @@ class TabBarController: UITabBarController {
     
     override func viewDidLoad() {
         AppState.setViewTitle = setTitle
-        AppState.updateCallbacks.append(removeSpinner)
+        AppState.postPopulateCallbacks.append(removeSpinner)
         
         initSpinner()
         displaySpinner()

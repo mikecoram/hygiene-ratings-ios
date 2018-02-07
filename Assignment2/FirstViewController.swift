@@ -20,7 +20,7 @@ class FirstViewController: UIViewController {
         super.viewDidLoad()
         
         initRestaurantTable()
-        AppState.updateCallbacks.append(updateRestaurantsTable)
+        AppState.postPopulateCallbacks.append(updateRestaurantsTable)
         AppState.popluateRestaurantsByLocation(coordinate: AppState.locationHandler.getCurrentCoordinate())
     }
     
@@ -30,13 +30,13 @@ class FirstViewController: UIViewController {
     }
     
     func updateRestaurantsTable() -> Void {
-        self.restaurantTableSource.setRestaurants(restaurants: AppState.restaurants)
-        self.restaurantTable.reloadData()
+        restaurantTableSource.setRestaurants(restaurants: AppState.restaurants)
+        restaurantTable.reloadData()
         
         // Scroll back to top
         if AppState.restaurants.count > 0 {
             let indexPath = IndexPath(row: 0, section: 0)
-            self.restaurantTable.scrollToRow(at: indexPath, at: .top, animated: false)
+            restaurantTable.scrollToRow(at: indexPath, at: .top, animated: false)
         }
     }
     
