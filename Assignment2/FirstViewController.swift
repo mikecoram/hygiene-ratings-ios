@@ -12,6 +12,7 @@ import CoreLocation
 
 class FirstViewController: UIViewController {
     @IBOutlet weak var restaurantTable: UITableView!
+    var spinner : UIView!
     
     let restaurantTableSource = RestaurantTableDataSource()
     
@@ -29,10 +30,13 @@ class FirstViewController: UIViewController {
     }
     
     func updateRestaurantsTable() -> Void {
-        // Reload the table view on the main thread
-        DispatchQueue.main.async() {
-            self.restaurantTableSource.setRestaurants(restaurants: AppState.restaurants)
-            self.restaurantTable.reloadData()
+        self.restaurantTableSource.setRestaurants(restaurants: AppState.restaurants)
+        self.restaurantTable.reloadData()
+        
+        // Scroll back to top
+        if AppState.restaurants.count > 0 {
+            let indexPath = IndexPath(row: 0, section: 0)
+            self.restaurantTable.scrollToRow(at: indexPath, at: .top, animated: false)
         }
     }
     

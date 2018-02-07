@@ -83,7 +83,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="PQr-Ze-W5v"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="List" image="first" id="Ak0-78-eL1"/>
+                    <tabBarItem key="tabBarItem" title="List" image="list" selectedImage="list" id="Ak0-78-eL1"/>
                     <navigationItem key="navigationItem" id="Thg-wD-85A"/>
                     <connections>
                         <outlet property="restaurantTable" destination="HYA-02-RK9" id="nkL-3w-cBd"/>
@@ -102,13 +102,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Business Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G3c-X3-JR9" userLabel="Business Name">
-                                <rect key="frame" x="20" y="73" width="374" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="20" y="73" width="284" height="21"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Address" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eWh-RR-lT0">
-                                <rect key="frame" x="20" y="102" width="374" height="85"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Address" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eWh-RR-lT0">
+                                <rect key="frame" x="20" y="102" width="284" height="85"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -153,7 +153,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Evi-04-CUU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2269.5652173913045" y="-322.01086956521743"/>
+            <point key="canvasLocation" x="2268.75" y="-322.5"/>
         </scene>
         <!--Map-->
         <scene sceneID="wg7-f3-ORb">
@@ -176,7 +176,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="O1u-W8-tvY"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Map" image="second" id="cPa-gy-q4n"/>
+                    <tabBarItem key="tabBarItem" title="Map" image="map" selectedImage="map" id="cPa-gy-q4n"/>
                     <navigationItem key="navigationItem" id="piv-W1-I8K">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="G5A-wm-WLT">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="nVb-Ya-mVM">
@@ -191,7 +191,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1505.625" y="411.25"/>
+            <point key="canvasLocation" x="1528" y="414"/>
         </scene>
         <!--Nearest Restaurants-->
         <scene sceneID="yl2-sM-qoP">
@@ -202,9 +202,10 @@
                             <barButtonItem style="plain" systemItem="search" id="z34-6U-SQ6">
                                 <connections>
                                     <action selector="clickSearch:" destination="49e-Tb-3d3" id="3dG-aM-dWn"/>
+                                    <segue destination="Pb7-7D-hME" kind="show" id="QbB-Bm-SVQ"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem style="plain" systemItem="action" id="6xe-9D-9Hm">
+                            <barButtonItem image="nearest" style="plain" id="6xe-9D-9Hm">
                                 <connections>
                                     <action selector="clickNearest:" destination="49e-Tb-3d3" id="wkK-mm-kCc"/>
                                 </connections>
@@ -217,6 +218,7 @@
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
+                        <outlet property="NavItem" destination="c6o-Dt-WAg" id="DMf-pD-qln"/>
                         <segue destination="9pv-A4-QxB" kind="relationship" relationship="viewControllers" id="Zgk-pP-cSf"/>
                         <segue destination="8rJ-Kc-sve" kind="relationship" relationship="viewControllers" id="kEh-Fm-T4O"/>
                     </connections>
@@ -244,10 +246,67 @@
             </objects>
             <point key="canvasLocation" x="-279" y="-323"/>
         </scene>
+        <!--Search View Controller-->
+        <scene sceneID="Trh-bM-OjU">
+            <objects>
+                <viewController id="Pb7-7D-hME" customClass="SearchViewController" customModule="Assignment2" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="NbF-sd-Oam">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="A3x-Y5-xQm">
+                                <rect key="frame" x="16" y="75" width="288" height="29"/>
+                                <segments>
+                                    <segment title="Postcode"/>
+                                    <segment title="Business Name"/>
+                                </segments>
+                            </segmentedControl>
+                            <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MZS-BT-SYX">
+                                <rect key="frame" x="0.0" y="115" width="320" height="56"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="arb-83-2L7" userLabel="Get Results">
+                                <rect key="frame" x="98" y="183" width="125" height="30"/>
+                                <state key="normal" title="Get Results"/>
+                                <connections>
+                                    <action selector="getResultsClick:" destination="Pb7-7D-hME" eventType="touchUpInside" id="zB0-mQ-FYT"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="A3x-Y5-xQm" firstAttribute="top" secondItem="1Sa-pE-8pt" secondAttribute="top" constant="10" id="7XE-kl-h4w"/>
+                            <constraint firstItem="arb-83-2L7" firstAttribute="top" secondItem="1Sa-pE-8pt" secondAttribute="top" constant="119" id="TGa-xi-gz8"/>
+                            <constraint firstItem="A3x-Y5-xQm" firstAttribute="centerX" secondItem="1Sa-pE-8pt" secondAttribute="centerX" id="dLa-sT-LP1"/>
+                            <constraint firstItem="arb-83-2L7" firstAttribute="centerX" secondItem="1Sa-pE-8pt" secondAttribute="centerX" id="in0-ux-idd"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="1Sa-pE-8pt"/>
+                    </view>
+                    <connections>
+                        <outlet property="searchDisplayController" destination="j24-ye-C3r" id="K9X-7q-dqi"/>
+                        <outlet property="searchSelector" destination="A3x-Y5-xQm" id="M4F-Nu-DdZ"/>
+                        <outlet property="searchTerm" destination="MZS-BT-SYX" id="uep-1F-7UF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8ct-FF-eHu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="j24-ye-C3r">
+                    <connections>
+                        <outlet property="delegate" destination="Pb7-7D-hME" id="zSt-qB-dwW"/>
+                        <outlet property="searchContentsController" destination="Pb7-7D-hME" id="oET-7L-O8F"/>
+                        <outlet property="searchResultsDataSource" destination="Pb7-7D-hME" id="rKF-vE-FK6"/>
+                        <outlet property="searchResultsDelegate" destination="Pb7-7D-hME" id="xtH-rE-mJa"/>
+                    </connections>
+                </searchDisplayController>
+            </objects>
+            <point key="canvasLocation" x="652.5" y="-756.25"/>
+        </scene>
     </scenes>
     <resources>
         <image name="5" width="145" height="74"/>
         <image name="first" width="30" height="30"/>
-        <image name="second" width="30" height="30"/>
+        <image name="list" width="30" height="30"/>
+        <image name="map" width="30" height="30"/>
+        <image name="nearest" width="30" height="30"/>
     </resources>
 </document>

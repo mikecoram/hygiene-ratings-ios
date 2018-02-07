@@ -9,13 +9,22 @@
 import UIKit
 import MapKit
 
-class SecondViewController: UIViewController {
+class CustomAnnotation: MKPointAnnotation {
+    var imageName: String!
+}
+
+class SecondViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var map: MKMapView!
     let SPAN_SIZE = 0.005
     
     override func viewDidLoad() {
         super.viewDidLoad()
         AppState.updateCallbacks.append(initMap)
+        
+        map.delegate = self
+        map.mapType = MKMapType.standard
+        map.showsUserLocation = true
+        
         initMap()
     }
     
@@ -30,10 +39,27 @@ class SecondViewController: UIViewController {
         let region: MKCoordinateRegion = MKCoordinateRegionMake(location, span)
         map.setRegion(region, animated: true)
         
-        DispatchQueue.main.async() {
-            self.clearAnnotations()
-            self.addAnnotations()
+        self.clearAnnotations()
+        self.addAnnotations()
+    }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        let identifier = "pin"
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
+        
+        if let customPointAnnotation = annotation as? CustomAnnotation {
+            if annotationView == nil {
+                annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+                annotationView?.canShowCallout = true
+            } else {
+                annotationView?.annotation = annotation
+            }
+
+            let image = UIImage(named: customPointAnnotation.imageName)
+            annotationView?.image = image
         }
+        
+        return annotationView
     }
     
     func clearAnnotations() {
@@ -42,13 +68,15 @@ class SecondViewController: UIViewController {
     
     func addAnnotations() {
         for restaurant in AppState.restaurants {
-            let annotation = MKPointAnnotation()
+            let annotation = CustomAnnotation()
+            annotation.imageName = ImageHandler.getHygienePinName(restaurant.RatingValue)
             
             annotation.coordinate = CLLocationCoordinate2DMake(
                 Double(restaurant.Latitude)!,
                 Double(restaurant.Longitude)!
             )
             annotation.title = restaurant.BusinessName
+            annotation.subtitle = ""
             
             map.addAnnotation(annotation)
         }

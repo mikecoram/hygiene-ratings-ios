@@ -19,5 +19,5 @@ struct Restaurant : Codable {
     var RatingDate: String
     var Longitude: String
     var Latitude: String
-    var DistanceKM: String
+    //var DistanceKM: String
 }

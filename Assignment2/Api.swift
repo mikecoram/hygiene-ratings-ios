@@ -22,17 +22,23 @@ class Api {
     static func getRestaurantsByPostcode(postcode: String, completionHandler: @escaping ([Restaurant]?, Error?) -> Void) {
         getRestaurants(query: "?op=s_postcode&postcode=\(postcode)", completionHandler: completionHandler)
     }
+    
+    class func getRestaurants(query: String,
+                  completionHandler: @escaping ([Restaurant]?, Error?) -> Void) {
         
-    class func getRestaurants(query: String, completionHandler: @escaping ([Restaurant]?, Error?) -> Void) {
-        let url = URL(string: "\(BASE_URL)\(query)")
+        let encodedQuery = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        let url = URL(string:"\(BASE_URL)\(encodedQuery!)")
         
         let session = URLSession.shared
         session.dataTask(with: url!) { (data, response, error) in
             if let data = data {
                 do {
                     let restaurants = try JSONDecoder().decode([Restaurant].self, from: data)
-                    completionHandler(restaurants, nil)
+                    DispatchQueue.main.async() {
+                        completionHandler(restaurants, nil)
+                    }
                 } catch {
+                    print("Decode Error:")
                     print(error)
                 }
             }

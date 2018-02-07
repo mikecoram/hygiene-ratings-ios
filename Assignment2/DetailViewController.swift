@@ -21,12 +21,14 @@ class DetailViewController : UIViewController {
     @IBOutlet weak var CoordinatesLabel: UILabel!
     
     @IBOutlet weak var RatingDateLabel: UILabel!
+    
+    let SPAN_SIZE = 0.005
     var restaurant : Restaurant?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let span: MKCoordinateSpan = MKCoordinateSpanMake(0.01, 0.01)
+        let span: MKCoordinateSpan = MKCoordinateSpanMake(SPAN_SIZE, SPAN_SIZE)
         let location: CLLocationCoordinate2D = CLLocationCoordinate2DMake(
             Double(restaurant!.Latitude)!,
             Double(restaurant!.Longitude)!

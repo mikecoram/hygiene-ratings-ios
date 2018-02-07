@@ -10,6 +10,10 @@ import Foundation
 
 class ImageHandler {
     static func getHygieneImageLocation(rating: String) -> String {
-        return "\(rating).jpg";
+        return "\(rating).jpg"
+    }
+    
+    static func getHygienePinName(_ rating: String) -> String {
+        return "\(rating)-pin.png"
     }
 }
