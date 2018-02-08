@@ -12,17 +12,17 @@ class TabBarController: UITabBarController {
     @IBOutlet weak var NavItem: UINavigationItem!
     var spinner : UIView!
     
-    @IBAction func clickNearest(_ sender: Any) {
-        displaySpinner()
-        AppState.popluateRestaurantsByLocation(coordinate: AppState.locationHandler.getCurrentCoordinate())
-    }
-    
     override func viewDidLoad() {
         AppState.setViewTitle = setTitle
         AppState.postPopulateCallbacks.append(removeSpinner)
         
         initSpinner()
         displaySpinner()
+    }
+    
+    @IBAction func clickNearest(_ sender: Any) {
+        displaySpinner()
+        AppState.popluateRestaurantsByLocation(coordinate: AppState.locationHandler.getCurrentCoordinate())
     }
     
     func setTitle(_ title: String) {

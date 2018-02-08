@@ -15,11 +15,39 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     let BY_POSTCODE_INDEX = 0
     let BY_NAME_INDEX = 1
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        searchTerm.delegate = self
+        setSelectedSearchType()
+        focusSearchTerm()
+    }
+    
+    func focusSearchTerm() {
+        searchTerm.becomeFirstResponder()
+    }
+    
+    // Remember last search type
+    func setSelectedSearchType() {
+        switch AppState.queryType {
+        case .byName:
+            searchSelector.selectedSegmentIndex = BY_NAME_INDEX
+            break
+        default:
+            searchSelector.selectedSegmentIndex = BY_POSTCODE_INDEX
+            break
+        }
+    }
+    
     @IBAction func getResultsClick(_ sender: Any) {
-        searchBarSearchButtonClicked(searchTerm)
+        performSearch()
     }
     
     func searchBarSearchButtonClicked(_:UISearchBar) {
+        performSearch()
+    }
+    
+    func performSearch() {
         if validationPassed() {
             populateRestaurants()
         }
@@ -28,14 +56,14 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         }
     }
     
+    func validationPassed() -> Bool {
+        return searchTerm.text!.count >= 3
+    }
+
     func displayValidationFailedAlert() {
         let alert = UIAlertController(title: "Search Failed", message: "Your search term must be longer than 3 characters.", preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default))
         self.present(alert, animated: true)
-    }
-    
-    func validationPassed() -> Bool {
-        return searchTerm.text!.count >= 3
     }
     
     func populateRestaurants() {
@@ -60,29 +88,5 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         navigationController?.popViewController(animated: true)
         let tabBarController = navigationController?.topViewController as! TabBarController
         tabBarController.displaySpinner()
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        searchTerm.delegate = self
-        setSelectedSearchType()
-        focusSearchTerm()
-    }
-    
-    func focusSearchTerm() {
-        searchTerm.becomeFirstResponder()
-    }
-    
-    // Remember last search type
-    func setSelectedSearchType() {
-        switch AppState.queryType {
-        case .byName:
-            searchSelector.selectedSegmentIndex = BY_NAME_INDEX
-            break
-        default:
-            searchSelector.selectedSegmentIndex = BY_POSTCODE_INDEX
-            break
-        }
     }
 }

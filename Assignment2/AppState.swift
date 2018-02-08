@@ -39,7 +39,7 @@ class AppState {
     }
     
     static func popluateRestaurantsByLocation(coordinate: Coordinate) {
-        setTitle("Nearest Restaurants")
+        setTitle("Nearest Results")
         queryType = QueryType.nearest
         
         ApiHandler.getRestaurantsNearestToLocation(
@@ -49,7 +49,7 @@ class AppState {
     }
     
     static func populateRestaurantsByName(name: String) {
-        setTitle("'\(name)'")
+        setTitle("Results for '\(name)'")
         queryType = QueryType.byName
         
         ApiHandler.getRestaurantsByName(
@@ -59,7 +59,7 @@ class AppState {
     }
     
     static func populateRestaurantsByPostcode(postcode: String) {
-        setTitle("Restaurants at: '\(postcode)'")
+        setTitle("Results at: '\(postcode)'")
         queryType = QueryType.byPostcode
         
         ApiHandler.getRestaurantsByPostcode(

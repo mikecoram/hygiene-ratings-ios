@@ -37,7 +37,7 @@ class RestaurantMapViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Display selected restaurant details
-        let selected = map.selectedAnnotations[0] as! CustomAnnotation
+        let selected = map.selectedAnnotations[0] as! RestaurantAnnotation
         (segue.destination as! DetailViewController).restaurant = selected.restaurant
     }
     

@@ -10,16 +10,11 @@ import Foundation
 import UIKit
 import MapKit
 
-class CustomAnnotation: MKPointAnnotation {
-    var restaurant: Restaurant!
-    var imageName: String!
-}
-
 class MapViewDelegate : UIViewController, MKMapViewDelegate {
     var parentView: UIViewController!
     
     static func addAnnotation(_ restaurant: Restaurant, map: MKMapView) {
-        let annotation = CustomAnnotation()
+        let annotation = RestaurantAnnotation()
         annotation.imageName = ImageHandler.getHygienePinName(restaurant.RatingValue)
         
         annotation.coordinate = CLLocationCoordinate2DMake(
@@ -45,7 +40,7 @@ class MapViewDelegate : UIViewController, MKMapViewDelegate {
         let identifier = "pin"
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
         
-        if let customPointAnnotation = annotation as? CustomAnnotation {
+        if let customPointAnnotation = annotation as? RestaurantAnnotation {
             if annotationView == nil {
                 annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
                 annotationView?.canShowCallout = true
