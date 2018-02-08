@@ -9,14 +9,21 @@
 import Foundation
 
 class AppState {
-    static var title = String()
-    static var restaurants : [Restaurant] = [Restaurant]()
+    enum QueryType {
+        case nearest
+        case byPostcode
+        case byName
+    }
+    
     static let locationHandler = LocationHandler()
+
+    static var restaurants: [Restaurant] = [Restaurant]()
+    static var queryType: QueryType = QueryType.nearest
     
     // Functions to call after the restaurants array has been populated
     static var postPopulateCallbacks = [() -> Void]()
     
-    static var setViewTitle : ((_ :String) -> Void)?
+    static var setViewTitle: ((_ :String) -> Void)?
     
     class func complete(restaurants: [Restaurant]?, error: Error?) -> Void {
         if error == nil {
@@ -33,6 +40,7 @@ class AppState {
     
     static func popluateRestaurantsByLocation(coordinate: Coordinate) {
         setTitle("Nearest Restaurants")
+        queryType = QueryType.nearest
         
         Api.getRestaurantsNearestToLocation(
             coordinate: coordinate,
@@ -42,6 +50,7 @@ class AppState {
     
     static func populateRestaurantsByName(name: String) {
         setTitle("'\(name)'")
+        queryType = QueryType.byName
         
         Api.getRestaurantsByName(
             name: name,
@@ -50,7 +59,8 @@ class AppState {
     }
     
     static func populateRestaurantsByPostcode(postcode: String) {
-        setTitle("'\(postcode)'")
+        setTitle("Restaurants at: '\(postcode)'")
+        queryType = QueryType.byPostcode
         
         Api.getRestaurantsByPostcode(
             postcode: postcode,

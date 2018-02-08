@@ -9,77 +9,53 @@
 import UIKit
 import MapKit
 
-class CustomAnnotation: MKPointAnnotation {
-    var imageName: String!
-}
-
-class SecondViewController: UIViewController, MKMapViewDelegate {
+class SecondViewController: UIViewController {
     @IBOutlet weak var map: MKMapView!
-    let SPAN_SIZE = 0.005
+    
+    let mapViewDelegate = MapViewDelegate()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        AppState.postPopulateCallbacks.append(initMap)
         
-        map.delegate = self
-        map.mapType = MKMapType.standard
-        map.showsUserLocation = true
+        AppState.postPopulateCallbacks.append(setMap)
         
         initMap()
+        setMap()
     }
     
     func initMap() {
-        let coordinate = AppState.locationHandler.getCurrentCoordinate()
-        
-        let span: MKCoordinateSpan = MKCoordinateSpanMake(SPAN_SIZE, SPAN_SIZE)
-        let location: CLLocationCoordinate2D = CLLocationCoordinate2DMake(
-            coordinate.latitude,
-            coordinate.longitude
-        )
-        let region: MKCoordinateRegion = MKCoordinateRegionMake(location, span)
-        map.setRegion(region, animated: true)
-        
-        clearAnnotations()
-        addAnnotations()
+        map.delegate = mapViewDelegate
+        mapViewDelegate.parentView = self
+        map.mapType = MKMapType.standard
     }
     
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        let identifier = "pin"
-        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
-        
-        if let customPointAnnotation = annotation as? CustomAnnotation {
-            if annotationView == nil {
-                annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-                annotationView?.canShowCallout = true
-            } else {
-                annotationView?.annotation = annotation
-            }
-
-            let image = UIImage(named: customPointAnnotation.imageName)
-            annotationView?.image = image
-        }
-        
-        return annotationView
+    func setMap() {
+        clearAnnotations()
+        addAnnotations()
+        zoomToFitAnnotations()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Display selected restaurant details
+        let selected = map.selectedAnnotations[0] as! CustomAnnotation
+        (segue.destination as! DetailViewController).restaurant = selected.restaurant
     }
     
     func clearAnnotations() {
+        map.showsUserLocation = false
         map.removeAnnotations(map.annotations)
     }
     
     func addAnnotations() {
         for restaurant in AppState.restaurants {
-            let annotation = CustomAnnotation()
-            annotation.imageName = ImageHandler.getHygienePinName(restaurant.RatingValue)
-            
-            annotation.coordinate = CLLocationCoordinate2DMake(
-                Double(restaurant.Latitude)!,
-                Double(restaurant.Longitude)!
-            )
-            annotation.title = restaurant.BusinessName
-            annotation.subtitle = ""
-            
-            map.addAnnotation(annotation)
+            MapViewDelegate.addAnnotation(restaurant, map: map)
         }
+    }
+
+    func zoomToFitAnnotations() {
+        map.showsUserLocation = false // Don't include users location in the zooming
+        map.showAnnotations(map.annotations, animated: true)
+        map.showsUserLocation = true
     }
 }
 

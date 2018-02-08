@@ -13,6 +13,7 @@
 		2715410A20289598005CC0D1 /* LocationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2715410920289598005CC0D1 /* LocationHandler.swift */; };
 		2715410C202897E1005CC0D1 /* ImageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2715410B202897E1005CC0D1 /* ImageHandler.swift */; };
 		2715410E20289829005CC0D1 /* RestaurantTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2715410D20289829005CC0D1 /* RestaurantTableDataSource.swift */; };
+		275A9DC9202BB9BB00328636 /* MapViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275A9DC8202BB9BB00328636 /* MapViewDelegate.swift */; };
 		27B336AE202B7761003061AC /* Spinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B336AD202B7761003061AC /* Spinner.swift */; };
 		27E42DE3201F433800AC7E15 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27E42DE2201F433800AC7E15 /* AppDelegate.swift */; };
 		27E42DE5201F433800AC7E15 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27E42DE4201F433800AC7E15 /* FirstViewController.swift */; };
@@ -33,6 +34,7 @@
 		2715410920289598005CC0D1 /* LocationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationHandler.swift; sourceTree = "<group>"; };
 		2715410B202897E1005CC0D1 /* ImageHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageHandler.swift; sourceTree = "<group>"; };
 		2715410D20289829005CC0D1 /* RestaurantTableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantTableDataSource.swift; sourceTree = "<group>"; };
+		275A9DC8202BB9BB00328636 /* MapViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewDelegate.swift; sourceTree = "<group>"; };
 		27B336AD202B7761003061AC /* Spinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spinner.swift; sourceTree = "<group>"; };
 		27E42DDF201F433800AC7E15 /* Assignment2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Assignment2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		27E42DE2201F433800AC7E15 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 				27E42DFA201F485800AC7E15 /* RestaurantCell.swift */,
 				2715410D20289829005CC0D1 /* RestaurantTableDataSource.swift */,
 				27E42DFE201F502B00AC7E15 /* Api.swift */,
+				275A9DC8202BB9BB00328636 /* MapViewDelegate.swift */,
 				2715410920289598005CC0D1 /* LocationHandler.swift */,
 				2715410B202897E1005CC0D1 /* ImageHandler.swift */,
 				27B336AD202B7761003061AC /* Spinner.swift */,
@@ -178,6 +181,7 @@
 				27B336AE202B7761003061AC /* Spinner.swift in Sources */,
 				27E42DE7201F433800AC7E15 /* SecondViewController.swift in Sources */,
 				27E42DE3201F433800AC7E15 /* AppDelegate.swift in Sources */,
+				275A9DC9202BB9BB00328636 /* MapViewDelegate.swift in Sources */,
 				27E42DE5201F433800AC7E15 /* FirstViewController.swift in Sources */,
 				2714F1BD2028B59100272FB0 /* AppState.swift in Sources */,
 				2715410820284A63005CC0D1 /* DetailViewController.swift in Sources */,

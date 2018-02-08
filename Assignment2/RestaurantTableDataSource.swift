@@ -23,17 +23,13 @@ class RestaurantTableDataSource : UIViewController, UITableViewDelegate, UITable
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "restaurantCell", for: indexPath) as! RestaurantCell
         
+        cell.index = indexPath.row
+        
         let restaurant = restaurants[indexPath.row]
         
-        var rating = restaurant.RatingValue
-        if (rating == "-1") {
-            rating = "exempt"
-        }
-        
-        cell.hygieneImage.image = UIImage.init(named: ImageHandler.getHygieneImageLocation(rating: rating))
-        
-        cell.index = indexPath.row
+        cell.hygieneImage.image = UIImage.init(named: ImageHandler.getHygieneImageLocation(rating: restaurant.RatingValue))
         cell.nameLabel.text = restaurant.BusinessName
+        
         return cell
     }    
 }
