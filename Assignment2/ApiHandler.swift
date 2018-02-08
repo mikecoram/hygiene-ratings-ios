@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Api {
+class ApiHandler {
     static var BASE_URL = "http://radikaldesign.co.uk/sandbox/hygiene.php"
         
     static func getRestaurantsNearestToLocation(coordinate: Coordinate, completionHandler: @escaping ([Restaurant]?, Error?) -> Void) {

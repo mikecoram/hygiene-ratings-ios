@@ -8,20 +8,12 @@
 
 import UIKit
 
-class SearchSelection {
-    var index: Int
-    
-    init(index: Int) {
-        self.index = index
-    }
-}
-
 class SearchViewController: UIViewController, UISearchBarDelegate {
     @IBOutlet weak var searchSelector: UISegmentedControl!
     @IBOutlet weak var searchTerm: UISearchBar!
 
-    var byPostcode = SearchSelection(index: 0)
-    var byName = SearchSelection(index: 1)
+    let BY_POSTCODE_INDEX = 0
+    let BY_NAME_INDEX = 1
     
     @IBAction func getResultsClick(_ sender: Any) {
         populateRestaurants()
@@ -36,10 +28,10 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         let query = searchTerm.text!
         
         switch index {
-        case byName.index:
+        case BY_NAME_INDEX:
             AppState.populateRestaurantsByName(name: query)
             break
-        case byPostcode.index:
+        case BY_POSTCODE_INDEX:
             AppState.populateRestaurantsByPostcode(postcode: query)
             break
         default:
@@ -54,5 +46,14 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         searchTerm.delegate = self
+        
+        switch AppState.queryType {
+        case .byName:
+            searchSelector.selectedSegmentIndex = BY_NAME_INDEX
+            break
+        default:
+            searchSelector.selectedSegmentIndex = BY_POSTCODE_INDEX
+            break
+        }
     }
 }

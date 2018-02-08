@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class SecondViewController: UIViewController {
+class RestaurantMapViewController: UIViewController {
     @IBOutlet weak var map: MKMapView!
     
     let mapViewDelegate = MapViewDelegate()

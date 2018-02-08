@@ -42,7 +42,7 @@ class AppState {
         setTitle("Nearest Restaurants")
         queryType = QueryType.nearest
         
-        Api.getRestaurantsNearestToLocation(
+        ApiHandler.getRestaurantsNearestToLocation(
             coordinate: coordinate,
             completionHandler: complete
         )
@@ -52,7 +52,7 @@ class AppState {
         setTitle("'\(name)'")
         queryType = QueryType.byName
         
-        Api.getRestaurantsByName(
+        ApiHandler.getRestaurantsByName(
             name: name,
             completionHandler: complete
         )
@@ -62,7 +62,7 @@ class AppState {
         setTitle("Restaurants at: '\(postcode)'")
         queryType = QueryType.byPostcode
         
-        Api.getRestaurantsByPostcode(
+        ApiHandler.getRestaurantsByPostcode(
             postcode: postcode,
             completionHandler: complete
         )

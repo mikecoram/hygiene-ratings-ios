@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class FirstViewController: UIViewController {
+class RestaurantListViewController: UIViewController {
     @IBOutlet weak var restaurantTable: UITableView!
     var spinner : UIView!
     
