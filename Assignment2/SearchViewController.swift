@@ -16,11 +16,26 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     let BY_NAME_INDEX = 1
     
     @IBAction func getResultsClick(_ sender: Any) {
-        populateRestaurants()
+        searchBarSearchButtonClicked(searchTerm)
     }
     
     func searchBarSearchButtonClicked(_:UISearchBar) {
-        populateRestaurants()
+        if validationPassed() {
+            populateRestaurants()
+        }
+        else {
+            displayValidationFailedAlert()
+        }
+    }
+    
+    func displayValidationFailedAlert() {
+        let alert = UIAlertController(title: "Search Failed", message: "Your search term must be longer than 3 characters.", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default))
+        self.present(alert, animated: true)
+    }
+    
+    func validationPassed() -> Bool {
+        return searchTerm.text!.count >= 3
     }
     
     func populateRestaurants() {
@@ -38,6 +53,10 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
             break
         }
         
+        exit()
+    }
+    
+    func exit() {
         navigationController?.popViewController(animated: true)
         let tabBarController = navigationController?.topViewController as! TabBarController
         tabBarController.displaySpinner()
@@ -45,8 +64,18 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        searchTerm.delegate = self
         
+        searchTerm.delegate = self
+        setSelectedSearchType()
+        focusSearchTerm()
+    }
+    
+    func focusSearchTerm() {
+        searchTerm.becomeFirstResponder()
+    }
+    
+    // Remember last search type
+    func setSelectedSearchType() {
         switch AppState.queryType {
         case .byName:
             searchSelector.selectedSegmentIndex = BY_NAME_INDEX
