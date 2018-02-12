@@ -285,7 +285,6 @@
                             <constraint firstItem="A3x-Y5-xQm" firstAttribute="centerX" secondItem="1Sa-pE-8pt" secondAttribute="centerX" id="8d1-N5-eb7"/>
                             <constraint firstItem="arb-83-2L7" firstAttribute="centerX" secondItem="1Sa-pE-8pt" secondAttribute="centerX" id="Sug-tT-eT3"/>
                             <constraint firstItem="arb-83-2L7" firstAttribute="top" secondItem="1Sa-pE-8pt" secondAttribute="top" constant="119" id="TGa-xi-gz8"/>
-                            <constraint firstItem="1Sa-pE-8pt" firstAttribute="bottom" secondItem="arb-83-2L7" secondAttribute="bottom" constant="267" id="nh3-en-tlV"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="1Sa-pE-8pt"/>
                     </view>

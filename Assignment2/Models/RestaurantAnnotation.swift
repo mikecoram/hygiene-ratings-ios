@@ -1,5 +1,5 @@
 //
-//  CustomAnnotation.swift
+//  RestaurantAnnotation.swift
 //  Assignment2
 //
 //  Created by Mike Coram on 08/02/2018.

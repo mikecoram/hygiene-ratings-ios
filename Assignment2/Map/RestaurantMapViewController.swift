@@ -1,5 +1,5 @@
 //
-//  SecondViewController.swift
+//  RestaurantMapViewController.swift
 //  Assignment2
 //
 //  Created by Mike Coram on 29/01/2018.

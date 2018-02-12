@@ -24,7 +24,7 @@ class AppState {
     static var postPopulateCallbacks = [() -> Void]()
     
     static var setViewTitle: ((_ :String) -> Void)?
-    
+        
     class func complete(restaurants: [Restaurant]?, error: Error?) -> Void {
         if error == nil {
             AppState.restaurants = restaurants!
@@ -59,7 +59,7 @@ class AppState {
     }
     
     static func populateRestaurantsByPostcode(postcode: String) {
-        setTitle("Results at: '\(postcode)'")
+        setTitle("Results at '\(postcode)'")
         queryType = QueryType.byPostcode
         
         ApiHandler.getRestaurantsByPostcode(
