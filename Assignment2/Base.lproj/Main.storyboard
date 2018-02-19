@@ -109,6 +109,7 @@
                             </label>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="BPb-IP-AUQ">
                                 <rect key="frame" x="0.0" y="302" width="320" height="178"/>
+                                <color key="tintColor" red="0.68377767010000001" green="0.72892758729999996" blue="0.28023357760000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </mapView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rating Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AuA-cm-WAv">
                                 <rect key="frame" x="20" y="249" width="144" height="21"/>
@@ -127,6 +128,7 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" red="0.84175151589999997" green="0.89562124009999999" blue="0.34241950510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="G3c-X3-JR9" firstAttribute="top" secondItem="Kmp-rS-J1e" secondAttribute="top" constant="10" id="0Fw-qA-to8"/>
                             <constraint firstItem="BPb-IP-AUQ" firstAttribute="leading" secondItem="Kmp-rS-J1e" secondAttribute="leading" id="1NU-wx-ey4"/>
@@ -169,6 +171,7 @@
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Q0x-K0-Pei">
                                 <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                                <color key="tintColor" red="0.68377767010000001" green="0.72892758729999996" blue="0.28023357760000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -205,12 +208,14 @@
                     <navigationItem key="navigationItem" title="Nearest Restaurants" id="c6o-Dt-WAg">
                         <rightBarButtonItems>
                             <barButtonItem style="done" systemItem="search" id="z34-6U-SQ6">
+                                <color key="tintColor" red="0.84175151589999997" green="0.89562124009999999" blue="0.34241950510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <action selector="clickSearch:" destination="49e-Tb-3d3" id="3dG-aM-dWn"/>
                                     <segue destination="Pb7-7D-hME" kind="show" id="QbB-Bm-SVQ"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem image="nearest" style="done" id="6xe-9D-9Hm">
+                                <color key="tintColor" red="0.84175151589999997" green="0.89562124009999999" blue="0.34241950510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <action selector="clickNearest:" destination="49e-Tb-3d3" id="wkK-mm-kCc"/>
                                 </connections>
@@ -220,7 +225,8 @@
                     <tabBar key="tabBar" contentMode="scaleToFill" id="W28-zg-YXA">
                         <rect key="frame" x="0.0" y="975" width="768" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="selectedImageTintColor" red="0.84175151586532593" green="0.89562124013900757" blue="0.34241950511932373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
                         <outlet property="NavItem" destination="c6o-Dt-WAg" id="DMf-pD-qln"/>
@@ -241,6 +247,11 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="5tI-Mq-BPQ">
                         <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="barTintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -265,6 +276,7 @@
                                     <segment title="Postcode"/>
                                     <segment title="Business Name"/>
                                 </segments>
+                                <color key="tintColor" red="0.84175151589999997" green="0.89562124009999999" blue="0.34241950510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </segmentedControl>
                             <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MZS-BT-SYX">
                                 <rect key="frame" x="0.0" y="115" width="320" height="56"/>
@@ -315,6 +327,6 @@
         <image name="nearest" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="P71-ht-oq9"/>
+        <segue reference="bzU-vM-sq5"/>
     </inferredMetricsTieBreakers>
 </document>
